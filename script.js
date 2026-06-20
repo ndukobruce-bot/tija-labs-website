@@ -12,10 +12,10 @@ const applicationRole = document.querySelector("#application-role");
 const applicationNote = document.querySelector(".application-note");
 const applyButtons = document.querySelectorAll("[data-apply-role]");
 const closeApplicationButtons = document.querySelectorAll("[data-close-application]");
-const inboxEmail = "ndukobruce@gmail.com";
+const inboxEmail = "tijalabs@gmail.com";
 const formService = {
   endpoint: "https://api.web3forms.com/submit",
-  accessKey: "REPLACE_WITH_WEB3FORMS_ACCESS_KEY"
+  accessKey: "57017acf-7dd1-4613-a09d-2346ef7de1ce"
 };
 let lastFocusedElement = null;
 
@@ -142,7 +142,7 @@ const setSubmitting = (form, isSubmitting) => {
 
 const sendToInbox = async ({ subject, fromName, replyTo, message }) => {
   if (!isFormServiceConfigured()) {
-    throw new Error("The form service is not configured yet. Add the Web3Forms access key for ndukobruce@gmail.com in script.js.");
+    throw new Error(`The form service is not configured yet. Add the Web3Forms access key for ${inboxEmail} in script.js.`);
   }
 
   const response = await fetch(formService.endpoint, {

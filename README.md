@@ -9,10 +9,10 @@ The contact form and role questionnaire forms are wired to Web3Forms so submissi
 To activate direct email delivery:
 
 1. Go to https://web3forms.com/
-2. Create an access key for `ndukobruce@gmail.com`.
+2. Create an access key for `tijalabs@gmail.com`.
 3. Verify the email if Web3Forms asks you to.
 4. Open `script.js`.
-5. Replace `REPLACE_WITH_WEB3FORMS_ACCESS_KEY` with the Web3Forms access key.
+5. Replace `formService.accessKey` with the Web3Forms access key generated for `tijalabs@gmail.com`.
 6. Commit and push the change.
 
 Web3Forms access keys are designed to be used in static frontend forms. Do not put private SMTP credentials, Gmail passwords, or secret API keys in this repository.
