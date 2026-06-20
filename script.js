@@ -15,7 +15,7 @@ const closeApplicationButtons = document.querySelectorAll("[data-close-applicati
 const inboxEmail = "tijalabs@gmail.com";
 const formService = {
   endpoint: "https://api.web3forms.com/submit",
-  accessKey: "57017acf-7dd1-4613-a09d-2346ef7de1ce"
+  accessKey: "3a0213b3-d098-4644-90f1-8a22ca739221"
 };
 let lastFocusedElement = null;
 
