@@ -13,6 +13,10 @@ const applicationNote = document.querySelector(".application-note");
 const applyButtons = document.querySelectorAll("[data-apply-role]");
 const closeApplicationButtons = document.querySelectorAll("[data-close-application]");
 const inboxEmail = "ndukobruce@gmail.com";
+const formService = {
+  endpoint: "https://api.web3forms.com/submit",
+  accessKey: "REPLACE_WITH_WEB3FORMS_ACCESS_KEY"
+};
 let lastFocusedElement = null;
 
 const questionnaires = {
@@ -125,13 +129,43 @@ if (window.lucide) {
   window.lucide.createIcons();
 }
 
-const buildMailto = (subject, body) => {
-  const params = new URLSearchParams({ subject, body });
-  return `mailto:${inboxEmail}?${params.toString().replace(/\+/g, "%20")}`;
+const isFormServiceConfigured = () =>
+  formService.accessKey && !formService.accessKey.includes("REPLACE_WITH");
+
+const setSubmitting = (form, isSubmitting) => {
+  const submitButton = form.querySelector("button[type='submit']");
+  if (!submitButton) return;
+  submitButton.disabled = isSubmitting;
+  submitButton.dataset.originalText ||= submitButton.textContent.trim();
+  submitButton.querySelector("span").textContent = isSubmitting ? "Sending..." : submitButton.dataset.originalText;
 };
 
-const openMail = (subject, body) => {
-  window.location.href = buildMailto(subject, body);
+const sendToInbox = async ({ subject, fromName, replyTo, message }) => {
+  if (!isFormServiceConfigured()) {
+    throw new Error("The form service is not configured yet. Add the Web3Forms access key for ndukobruce@gmail.com in script.js.");
+  }
+
+  const response = await fetch(formService.endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify({
+      access_key: formService.accessKey,
+      subject,
+      from_name: fromName,
+      email: replyTo,
+      message
+    })
+  });
+
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok || result.success === false) {
+    throw new Error(result.message || "The message could not be sent. Please try again.");
+  }
+
+  return result;
 };
 
 navToggle?.addEventListener("click", () => {
@@ -158,7 +192,7 @@ roleCards.forEach((card) => {
   });
 });
 
-contactForm?.addEventListener("submit", (event) => {
+contactForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   if (!contactForm.checkValidity()) {
@@ -181,8 +215,23 @@ contactForm?.addEventListener("submit", (event) => {
     message
   ].join("\n");
 
-  formNote.textContent = "Opening an email draft addressed to ndukobruce@gmail.com.";
-  openMail(`Tija Labs website message from ${name}`, body);
+  formNote.textContent = "Sending your message...";
+  setSubmitting(contactForm, true);
+
+  try {
+    await sendToInbox({
+      subject: `Tija Labs website message from ${name}`,
+      fromName: name,
+      replyTo: email,
+      message: body
+    });
+    contactForm.reset();
+    formNote.textContent = "Thanks, your message has been sent.";
+  } catch (error) {
+    formNote.textContent = `${error.message} Your message is still here, so you can try again.`;
+  } finally {
+    setSubmitting(contactForm, false);
+  }
 });
 
 const renderQuestionnaire = (roleKey) => {
@@ -219,7 +268,7 @@ const openApplication = (roleKey, opener) => {
   renderQuestionnaire(roleKey);
   applicationForm.reset();
   applicationRole.value = questionnaires[roleKey].title;
-  applicationNote.textContent = "Your email app will open with the completed application addressed to Bruce.";
+  applicationNote.textContent = "Submit your answers here. No email app will open.";
   applicationModal.classList.add("is-open");
   applicationModal.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
@@ -249,7 +298,7 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-applicationForm?.addEventListener("submit", (event) => {
+applicationForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   if (!applicationForm.checkValidity()) {
@@ -285,8 +334,23 @@ applicationForm?.addEventListener("submit", (event) => {
     ...answers
   ].join("\n");
 
-  applicationNote.textContent = "Opening an email draft addressed to ndukobruce@gmail.com.";
-  openMail(`Tija Labs ${role} Application - ${name}`, body);
+  applicationNote.textContent = "Sending your application...";
+  setSubmitting(applicationForm, true);
+
+  try {
+    await sendToInbox({
+      subject: `Tija Labs ${role} Application - ${name}`,
+      fromName: name,
+      replyTo: email,
+      message: body
+    });
+    applicationForm.reset();
+    applicationNote.textContent = "Thanks, your response has been sent.";
+  } catch (error) {
+    applicationNote.textContent = `${error.message} Your answers are still here, so you can try again.`;
+  } finally {
+    setSubmitting(applicationForm, false);
+  }
 });
 
 const observer = new IntersectionObserver(
