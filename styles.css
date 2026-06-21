@@ -263,6 +263,12 @@ h3 {
   object-position: center;
 }
 
+.hero-visual picture {
+  display: block;
+  height: 100%;
+  min-height: inherit;
+}
+
 .section {
   padding: 88px 0;
 }

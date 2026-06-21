@@ -17,6 +17,24 @@ const formService = {
   endpoint: "https://api.web3forms.com/submit",
   accessKey: "3a0213b3-d098-4644-90f1-8a22ca739221"
 };
+const iconPaths = {
+  "arrow-down": '<path d="M12 5v14"/><path d="m19 12-7 7-7-7"/>',
+  "book-open-check": '<path d="M12 7v14"/><path d="M3 18a2 2 0 0 1 2-2h6V5H5a2 2 0 0 0-2 2z"/><path d="M21 18a2 2 0 0 0-2-2h-6V5h6a2 2 0 0 1 2 2z"/><path d="m9 12 1.4 1.4L14 10"/>',
+  "briefcase-business": '<path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1"/><path d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 13h18"/><path d="M12 12v2"/>',
+  "chevron-down": '<path d="m6 9 6 6 6-6"/>',
+  "clipboard-list": '<path d="M9 5h6"/><path d="M9 3h6v4H9z"/><path d="M5 5h2"/><path d="M17 5h2"/><path d="M5 5v16h14V5"/><path d="M9 12h.01"/><path d="M12 12h4"/><path d="M9 16h.01"/><path d="M12 16h4"/>',
+  "external-link": '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
+  "globe-2": '<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20"/><path d="M12 2a15 15 0 0 0 0 20"/>',
+  "graduation-cap": '<path d="m22 10-10-5-10 5 10 5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/><path d="M22 10v6"/>',
+  mail: '<path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/>',
+  menu: '<path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/>',
+  phone: '<path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3 5.2 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.7l.4 2.4a2 2 0 0 1-.6 1.8L8.6 10a16 16 0 0 0 5.4 5.4l1.1-1.3a2 2 0 0 1 1.8-.6l2.4.4a2 2 0 0 1 1.7 2z"/>',
+  rocket: '<path d="M4.5 16.5c-1.5 1.3-2 3.4-2 5 1.6 0 3.7-.5 5-2"/><path d="M9 15 4 10l7-7c3-3 8-1 10-1 0 2 2 7-1 10l-7 7z"/><path d="M15 9h.01"/><path d="M9 15l-2 2"/>',
+  send: '<path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/>',
+  target: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
+  "users-round": '<path d="M18 21a6 6 0 0 0-12 0"/><circle cx="12" cy="7" r="4"/><path d="M22 21a5 5 0 0 0-4-4.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/>',
+  x: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>'
+};
 let lastFocusedElement = null;
 
 const questionnaires = {
@@ -125,9 +143,16 @@ const questionnaires = {
   }
 };
 
-if (window.lucide) {
-  window.lucide.createIcons();
-}
+const renderIcons = () => {
+  document.querySelectorAll("[data-lucide]").forEach((element) => {
+    const name = element.getAttribute("data-lucide");
+    const paths = iconPaths[name];
+    if (!paths) return;
+    element.outerHTML = `<svg class="lucide lucide-${name}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
+  });
+};
+
+renderIcons();
 
 const isFormServiceConfigured = () =>
   formService.accessKey && !formService.accessKey.includes("REPLACE_WITH");

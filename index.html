@@ -16,16 +16,14 @@
     >
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#07182d">
-    <meta property="og:image" content="assets/tijalabs-banner.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <meta property="og:image" content="assets/tijalabs-banner-1200.jpg">
+    <link rel="preload" href="assets/tijalabs-banner-1200.webp" as="image" fetchpriority="high">
+    <link rel="stylesheet" href="styles.min.css">
   </head>
   <body>
     <header class="site-header" id="top">
       <a class="brand" href="#top" aria-label="Tija Labs home">
-        <img class="brand-logo" src="assets/tijalabs-logo.png" alt="" aria-hidden="true">
+        <img class="brand-logo" src="assets/tijalabs-logo-160.webp" width="42" height="42" alt="" aria-hidden="true" fetchpriority="high">
         <span>Tija Labs</span>
       </a>
 
@@ -63,7 +61,10 @@
         </div>
 
         <div class="hero-visual reveal" aria-label="Tija Labs brand banner">
-          <img src="assets/tijalabs-banner.png" alt="Tija Labs brand banner with metallic TL logo and create connect thrive tagline">
+          <picture>
+            <source srcset="assets/tijalabs-banner-1200.webp" type="image/webp">
+            <img src="assets/tijalabs-banner-1200.jpg" width="1200" height="642" alt="Tija Labs brand banner with metallic TL logo and create connect thrive tagline" fetchpriority="high" decoding="async">
+          </picture>
         </div>
       </section>
 
@@ -155,7 +156,7 @@
         </div>
         <div class="founder-grid">
           <article class="founder-card reveal">
-            <img class="avatar" src="assets/jeremiah-rioba.png" alt="Portrait of Jeremiah Rioba">
+            <img class="avatar" src="assets/jeremiah-rioba-192.webp" width="96" height="96" loading="lazy" decoding="async" alt="Portrait of Jeremiah Rioba">
             <div class="founder-copy">
               <h3>Jeremiah Rioba</h3>
               <p class="role">Lead Founder</p>
@@ -166,7 +167,7 @@
             </div>
           </article>
           <article class="founder-card reveal">
-            <img class="avatar" src="assets/bruce-nduko.png" alt="Portrait of Bruce Nduko">
+            <img class="avatar" src="assets/bruce-nduko-192.webp" width="96" height="96" loading="lazy" decoding="async" alt="Portrait of Bruce Nduko">
             <div class="founder-copy">
               <h3>Bruce Nduko</h3>
               <p class="role">Co-Founder &amp; CTO</p>
@@ -361,7 +362,7 @@
     <footer class="site-footer">
       <div>
         <a class="brand" href="#top" aria-label="Tija Labs home">
-          <img class="brand-logo" src="assets/tijalabs-logo.png" alt="" aria-hidden="true">
+          <img class="brand-logo" src="assets/tijalabs-logo-160.webp" width="42" height="42" loading="lazy" decoding="async" alt="" aria-hidden="true">
           <span>Tija Labs</span>
         </a>
         <p>Copyright &copy; 2026 Tija Labs. All rights reserved.</p>
@@ -378,7 +379,6 @@
       </div>
     </footer>
 
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <script src="script.js"></script>
+    <script src="script.min.js" defer></script>
   </body>
 </html>
