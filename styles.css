@@ -1,17 +1,19 @@
 :root {
-  --ink: #142326;
-  --muted: #5d6f73;
-  --paper: #fbfcf7;
+  --ink: #07182d;
+  --muted: #627286;
+  --paper: #eef3f7;
   --surface: #ffffff;
-  --line: #dce7e3;
-  --primary: #075f68;
-  --primary-dark: #043b42;
-  --lime: #c8ec5f;
-  --amber: #f4a62a;
-  --coral: #ef6b5b;
-  --sky: #34a8db;
-  --violet: #7467f0;
-  --shadow: 0 22px 60px rgba(20, 35, 38, 0.12);
+  --line: #c9d6e3;
+  --primary: #1262b3;
+  --primary-dark: #07182d;
+  --lime: #80e8ff;
+  --amber: #4da8ff;
+  --coral: #3455c9;
+  --sky: #00b7ff;
+  --violet: #5f7cff;
+  --steel: #d9e4ee;
+  --gunmetal: #172436;
+  --shadow: 0 24px 70px rgba(7, 24, 45, 0.18);
   --radius: 8px;
 }
 
@@ -27,7 +29,9 @@ body {
   margin: 0;
   color: var(--ink);
   background:
-    linear-gradient(180deg, rgba(200, 236, 95, 0.12), rgba(251, 252, 247, 0) 480px),
+    radial-gradient(circle at 78% 8%, rgba(0, 183, 255, 0.22), rgba(0, 183, 255, 0) 320px),
+    radial-gradient(circle at 8% 18%, rgba(18, 98, 179, 0.18), rgba(18, 98, 179, 0) 360px),
+    linear-gradient(180deg, #f7fbff 0%, #eef3f7 48%, #e6edf4 100%),
     var(--paper);
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.6;
@@ -63,10 +67,10 @@ textarea {
   width: min(1160px, calc(100% - 32px));
   margin: 16px auto 0;
   padding: 12px 14px;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(220, 231, 227, 0.92);
+  background: rgba(248, 252, 255, 0.82);
+  border: 1px solid rgba(167, 191, 211, 0.62);
   border-radius: 8px;
-  box-shadow: 0 10px 40px rgba(20, 35, 38, 0.08);
+  box-shadow: 0 12px 42px rgba(7, 24, 45, 0.12);
   backdrop-filter: blur(18px);
 }
 
@@ -77,21 +81,13 @@ textarea {
   font-weight: 800;
 }
 
-.brand-mark {
-  display: inline-grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  color: white;
-  background: var(--primary);
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border: 1px solid rgba(0, 183, 255, 0.32);
   border-radius: 8px;
-  box-shadow: inset 0 -8px 16px rgba(0, 0, 0, 0.14);
-}
-
-.brand-mark.large {
-  width: 52px;
-  height: 52px;
-  font-size: 1.4rem;
+  box-shadow: 0 8px 24px rgba(18, 98, 179, 0.22);
 }
 
 .site-nav {
@@ -111,7 +107,7 @@ textarea {
 .site-nav a:hover,
 .site-nav a:focus-visible {
   color: var(--primary);
-  background: rgba(7, 95, 104, 0.08);
+  background: rgba(18, 98, 179, 0.08);
 }
 
 .nav-toggle {
@@ -120,7 +116,7 @@ textarea {
   width: 42px;
   height: 42px;
   color: var(--ink);
-  background: var(--surface);
+  background: rgba(255, 255, 255, 0.84);
   border: 1px solid var(--line);
   border-radius: 8px;
 }
@@ -217,8 +213,8 @@ h3 {
   width: 42px;
   height: 42px;
   color: var(--primary-dark);
-  background: rgba(7, 95, 104, 0.08);
-  border: 1px solid rgba(7, 95, 104, 0.12);
+  background: rgba(18, 98, 179, 0.08);
+  border: 1px solid rgba(18, 98, 179, 0.14);
   border-radius: 8px;
   cursor: pointer;
 }
@@ -229,24 +225,21 @@ h3 {
 
 .button.primary {
   color: white;
-  background: var(--primary);
-  box-shadow: 0 14px 30px rgba(7, 95, 104, 0.22);
+  background: linear-gradient(135deg, #07182d, #1262b3 62%, #00b7ff);
+  box-shadow: 0 16px 34px rgba(18, 98, 179, 0.28);
 }
 
 .button.secondary {
   color: var(--primary);
-  background: white;
+  background: rgba(255, 255, 255, 0.82);
   border-color: var(--line);
 }
 
 .hero-visual {
   position: relative;
-  min-height: 560px;
-  border: 1px solid var(--line);
+  min-height: 520px;
+  border: 1px solid rgba(146, 174, 198, 0.72);
   border-radius: 8px;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(200, 236, 95, 0.36), rgba(255, 255, 255, 0) 30%),
-    linear-gradient(145deg, #ffffff, #eef8f6);
   box-shadow: var(--shadow);
   overflow: hidden;
 }
@@ -254,73 +247,20 @@ h3 {
 .hero-visual::before {
   content: "";
   position: absolute;
-  inset: 28px;
-  border: 1px dashed rgba(7, 95, 104, 0.2);
-  border-radius: 50%;
+  inset: 0;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 34%),
+    radial-gradient(circle at 70% 16%, rgba(128, 232, 255, 0.2), rgba(128, 232, 255, 0) 34%);
+  pointer-events: none;
 }
 
-.orbit-ring {
-  position: absolute;
-  inset: 92px;
-  border: 1px solid rgba(7, 95, 104, 0.18);
-  border-radius: 50%;
-}
-
-.core,
-.node {
-  position: absolute;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  border-radius: 8px;
-}
-
-.core {
-  left: 50%;
-  top: 50%;
-  width: 152px;
-  height: 152px;
-  gap: 8px;
-  transform: translate(-50%, -50%);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow);
-}
-
-.node {
-  width: 126px;
-  min-height: 92px;
-  padding: 14px;
-  color: white;
-  box-shadow: 0 18px 32px rgba(20, 35, 38, 0.18);
-}
-
-.node svg {
-  margin-bottom: 8px;
-}
-
-.node-study {
-  left: 10%;
-  top: 18%;
-  background: var(--sky);
-}
-
-.node-jobs {
-  right: 8%;
-  top: 25%;
-  background: var(--amber);
-}
-
-.node-pros {
-  left: 13%;
-  bottom: 17%;
-  background: var(--violet);
-}
-
-.node-learning {
-  right: 13%;
-  bottom: 13%;
-  background: var(--coral);
+.hero-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  object-position: center;
 }
 
 .section {
@@ -417,7 +357,8 @@ h3 {
   margin-bottom: 14px;
   padding: 6px 10px;
   color: var(--primary-dark);
-  background: rgba(200, 236, 95, 0.36);
+  background: rgba(128, 232, 255, 0.28);
+  border: 1px solid rgba(0, 183, 255, 0.24);
   border-radius: 8px;
   font-size: 0.72rem;
   font-weight: 800;
@@ -467,7 +408,8 @@ h3 {
   width: 42px;
   height: 42px;
   color: var(--primary-dark);
-  background: rgba(200, 236, 95, 0.32);
+  background: linear-gradient(135deg, rgba(128, 232, 255, 0.36), rgba(77, 168, 255, 0.24));
+  border: 1px solid rgba(0, 183, 255, 0.22);
   border-radius: 8px;
   font-size: 0.82rem;
   font-weight: 800;
@@ -508,7 +450,7 @@ h3 {
   height: 96px;
   object-fit: cover;
   object-position: center top;
-  background: #f7faf6;
+  background: #edf4fa;
   border: 1px solid var(--line);
   border-radius: 8px;
   box-shadow: 0 12px 28px rgba(20, 35, 38, 0.12);
@@ -534,7 +476,7 @@ h3 {
   width: 38px;
   height: 38px;
   color: var(--primary);
-  background: rgba(7, 95, 104, 0.08);
+  background: rgba(18, 98, 179, 0.08);
   border-radius: 8px;
 }
 
@@ -605,7 +547,7 @@ h3 {
 
 .role-apply {
   color: var(--primary);
-  background: rgba(7, 95, 104, 0.08);
+  background: rgba(18, 98, 179, 0.08);
 }
 
 .application-modal {
@@ -683,7 +625,7 @@ h3 {
   width: 100%;
   padding: 12px 13px;
   color: var(--ink);
-  background: #f7faf6;
+  background: #f7fbff;
   border: 1px solid var(--line);
   border-radius: 8px;
   outline: none;
@@ -696,7 +638,7 @@ h3 {
 .application-form input:focus,
 .application-form textarea:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(7, 95, 104, 0.12);
+  box-shadow: 0 0 0 4px rgba(0, 183, 255, 0.16);
 }
 
 .questionnaire {
@@ -755,7 +697,7 @@ h3 {
   gap: 12px;
   min-width: 0;
   padding: 12px;
-  background: rgba(7, 95, 104, 0.06);
+  background: rgba(18, 98, 179, 0.07);
   border-radius: 8px;
   color: var(--primary-dark);
   font-weight: 700;
@@ -782,7 +724,7 @@ h3 {
   width: 100%;
   padding: 12px 13px;
   color: var(--ink);
-  background: #f7faf6;
+  background: #f7fbff;
   border: 1px solid var(--line);
   border-radius: 8px;
   outline: none;
@@ -791,7 +733,7 @@ h3 {
 .contact-form input:focus,
 .contact-form textarea:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(7, 95, 104, 0.12);
+  box-shadow: 0 0 0 4px rgba(0, 183, 255, 0.16);
 }
 
 .form-note {
@@ -917,22 +859,6 @@ h3 {
 
   .hero-visual::before {
     inset: 20px;
-  }
-
-  .orbit-ring {
-    inset: 72px;
-  }
-
-  .core {
-    width: 126px;
-    height: 126px;
-  }
-
-  .node {
-    width: 104px;
-    min-height: 78px;
-    padding: 10px;
-    font-size: 0.84rem;
   }
 
   .section {
